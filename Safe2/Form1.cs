@@ -29,22 +29,32 @@ namespace Safe2
                 {
                     Button btn = new Button();
 
-                    int ID = rnd.Next(0, 2);
-                    btn.Width = 40;
-                    btn.Height = 40;
-                    btn.Name = "Btn" + i.ToString() + j.ToString();
+                    btn.Tag = rnd.Next(0, 2);
+                    int ID = (int)btn.Tag;
+                    btn.Width = 60;
+                    btn.Height = 60;
+                    btn.Name = "Btn " + (i+1) + " " + (j+1);
                     btn.Location = new Point(i * btn.Width, j * btn.Height);
                     btn.BackgroundImage = levers[ID];
                     btn.FlatStyle = FlatStyle.Flat;
                     btn.BackgroundImageLayout = ImageLayout.Stretch;
+                    btn.Click += new EventHandler(btn_Click);
                     this.Controls.Add(btn);
                     Console.WriteLine("Image " + ID);
                 }
         }
 
-        private void flip (Button btn, int ID)
+        void btn_Click(object sender, EventArgs e)
         {
-            btn.BackgroundImage = levers[1 - ID];
+            flip((Button)sender);
+            //MessageBox.Show("Нажата кнопка " + ((Button)sender).Name);
+        }
+
+        private void flip (Button btn)
+        {
+            int newID = 1 - (int)btn.Tag;
+            btn.BackgroundImage = levers[newID];
+            btn.Tag = newID;
         }
 
         private void Form1_Load(object sender, EventArgs e)

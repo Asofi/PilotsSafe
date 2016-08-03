@@ -37,7 +37,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(417, 12);
+            this.numericUpDown1.Location = new System.Drawing.Point(332, 12);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10,
             0,
@@ -60,7 +60,7 @@
             // btnStart3
             // 
             this.btnStart3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart3.Location = new System.Drawing.Point(461, 41);
+            this.btnStart3.Location = new System.Drawing.Point(376, 41);
             this.btnStart3.Name = "btnStart3";
             this.btnStart3.Size = new System.Drawing.Size(75, 23);
             this.btnStart3.TabIndex = 3;
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 339);
+            this.ClientSize = new System.Drawing.Size(464, 339);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnStart3);
             this.Controls.Add(this.numericUpDown1);
