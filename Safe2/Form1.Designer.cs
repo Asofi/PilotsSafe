@@ -31,25 +31,27 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnStart3 = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
+            this.btnSwitch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDown1
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown1.Location = new System.Drawing.Point(377, 12);
+            this.numericUpDown1.Location = new System.Drawing.Point(588, 10);
+            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.numericUpDown1.Minimum = new decimal(new int[] {
-            4,
+            3,
             0,
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown1.Size = new System.Drawing.Size(90, 20);
             this.numericUpDown1.TabIndex = 2;
             this.numericUpDown1.Value = new decimal(new int[] {
             4,
@@ -60,9 +62,10 @@
             // btnStart3
             // 
             this.btnStart3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart3.Location = new System.Drawing.Point(421, 41);
+            this.btnStart3.Location = new System.Drawing.Point(588, 44);
+            this.btnStart3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnStart3.Name = "btnStart3";
-            this.btnStart3.Size = new System.Drawing.Size(75, 23);
+            this.btnStart3.Size = new System.Drawing.Size(89, 52);
             this.btnStart3.TabIndex = 3;
             this.btnStart3.Text = "Start";
             this.btnStart3.UseVisualStyleBackColor = true;
@@ -71,22 +74,36 @@
             // btnRestart
             // 
             this.btnRestart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRestart.Location = new System.Drawing.Point(421, 79);
+            this.btnRestart.Location = new System.Drawing.Point(588, 100);
+            this.btnRestart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(75, 23);
+            this.btnRestart.Size = new System.Drawing.Size(90, 52);
             this.btnRestart.TabIndex = 4;
             this.btnRestart.Text = "Restart";
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnSwitch
+            // 
+            this.btnSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSwitch.Location = new System.Drawing.Point(588, 157);
+            this.btnSwitch.Name = "btnSwitch";
+            this.btnSwitch.Size = new System.Drawing.Size(90, 52);
+            this.btnSwitch.TabIndex = 5;
+            this.btnSwitch.Text = "Switch";
+            this.btnSwitch.UseVisualStyleBackColor = true;
+            this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 354);
+            this.ClientSize = new System.Drawing.Size(687, 531);
+            this.Controls.Add(this.btnSwitch);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnStart3);
             this.Controls.Add(this.numericUpDown1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -99,6 +116,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnStart3;
         private System.Windows.Forms.Button btnRestart;
+        private System.Windows.Forms.Button btnSwitch;
     }
 }
 

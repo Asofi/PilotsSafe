@@ -13,19 +13,20 @@ namespace Safe2
     public partial class Form1 : Form
     {
         private Button[,] buttons;
-        private int[,] win1, win0, current;
+        private int[,] current;
         private Image[] levers = new Image[2];
 
         private int fieldSize;
         Random rnd = new Random();
         private bool started = false;
         private bool won = false;
+        private bool swt = false;
 
         public Form1()
         {
             InitializeComponent();
-            levers[0] = Image.FromFile("Resources/Vert.png");
-            levers[1] = Image.FromFile("Resources/Hor.png");
+            levers[1] = Image.FromFile("Resources/Vert.png");
+            levers[0] = Image.FromFile("Resources/Hor.png");
         }
 
         private void CreateButtons()
@@ -48,6 +49,7 @@ namespace Safe2
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
                     buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     buttons[i, j].MouseClick += new MouseEventHandler(btn_MouseClick);
+                    buttons[i, j].Text = i + " " + j;
                     this.Controls.Add(buttons[i, j]);
                 }
         }
@@ -59,13 +61,11 @@ namespace Safe2
             int i = this.PointToClient(Cursor.Position).X / 50;
             int countI;
             int countJ;
-            MessageBox.Show(e.Button.ToString());
-            if (e.Button == MouseButtons.Right)
+            if (swt)
             {
                 flip(buttons[i, j]);
-                Console.WriteLine("Right");
             }
-            else if (e.Button == MouseButtons.Left)
+            else if (!swt)
             {
                 for (countI = 0; countI < fieldSize; countI++)
                 {
@@ -76,21 +76,20 @@ namespace Safe2
                     if (countJ != j)
                         flip(buttons[i, countJ]);
                 }
-                Console.WriteLine("Left");
             }
 
-           /* for (i = 0; i < fieldSize; i++)
+          /* for (i = 0; i < fieldSize; i++)
             {
                 for (j = 0; j < fieldSize; j++)
                 {
 
-                    Console.Write("{0,3}", current[j, i]);           
+                    Console.Write("{0,3}", buttons[j, i].Tag);           
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();*/
 
-            won = checkWin();
+            checkWin();
 
         }
 
@@ -104,34 +103,33 @@ namespace Safe2
         private bool checkWin()
         {
             bool check = false;
+            int prevI = 0;
+            int prevJ = 0;
             for (int i = 0; i < fieldSize; i++)
             {
                 for (int j = 1; j < fieldSize; j++)
                 {
-                    if ((int)buttons[i, j].Tag == (int)buttons[i, j-1].Tag)
-                        check = true;
-                    else
-                    {
-                        check = false;
-                        break;
-                    }
+                    Console.WriteLine("CHe za huina {0} {1} {2}", i, j, check);
+                    if ((int)buttons[i, j].Tag != (int)buttons[prevI, prevJ].Tag)
+                        return false;
+                    prevI = i;
+                    prevJ = j;
                 }
-                    if (!check)
-                        break;
             }              
 
-            if (check)
-            {
                 MessageBox.Show("WON!");
                 return true;
-            }
-            else
-                return false;
+   
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSwitch_Click(object sender, EventArgs e)
+        {
+            swt = !swt;
         }
 
         private void btnStart3_Click(object sender, EventArgs e)
@@ -157,5 +155,9 @@ namespace Safe2
             //Application.Restart();
         }
 
+       // private bool isCorrect()
+        //{
+            
+       // }
     }
 }
