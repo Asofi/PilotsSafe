@@ -125,6 +125,14 @@ namespace Safe2
 
         private void btnStart3_Click(object sender, EventArgs e)
         {
+            if (numericUpDown1.Value % 2 != 0)
+            {
+                Console.WriteLine("Нечетное");
+                while(!isCorrect() || !started)
+                    restart();
+                started = false;
+                return;
+            }
             restart();
             
         }
@@ -133,21 +141,20 @@ namespace Safe2
 
         private void restart()
         {
-
-            for (int i = 0; i < fieldSize; i++)
-                for (int j = 0; j < fieldSize; j++)
-                {
-                    this.Controls.Remove(buttons[i, j]);
-                }
-            Console.WriteLine("Найдено через - " + times++);
-            started = false;
-            CreateButtons();
-            if(fieldSize % 2 != 0)
+            if (buttons != null)
             {
-                if (!isCorrect())
-                    restart();
+                for (int i = 0; i < fieldSize; i++)
+                    for (int j = 0; j < fieldSize; j++)
+                    {
+                        this.Controls.Remove(buttons[i, j]);
+                        buttons[i, j].Dispose();
+                    }
+                Console.WriteLine("Найдено через - " + times++);
+                started = true;
+                CreateButtons();
             }
-            
+            else
+                CreateButtons();  
         }
 
         private bool isCorrect()
