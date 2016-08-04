@@ -13,7 +13,7 @@ namespace Safe2
     public partial class Form1 : Form
     {
         private Button[,] buttons;
-        private int[,] current;
+        private int[,] current, buf;
         private Image[] levers = new Image[2];
 
         private int fieldSize;
@@ -21,6 +21,9 @@ namespace Safe2
         private bool started = false;
         private bool won = false;
         private bool swt = false;
+
+        int countI;
+        int countJ;
 
         public Form1()
         {
@@ -35,6 +38,7 @@ namespace Safe2
             buttons = new Button[fieldSize, fieldSize];
             //Win conditions
             current = new int[fieldSize, fieldSize];
+            buf = new int[fieldSize, fieldSize];
             //Creating field of game
             for (int i = 0; i < fieldSize; i++)
                 for (int j = 0; j < fieldSize; j++)
@@ -49,7 +53,6 @@ namespace Safe2
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
                     buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     buttons[i, j].MouseClick += new MouseEventHandler(btn_MouseClick);
-                    buttons[i, j].Text = i + " " + j;
                     this.Controls.Add(buttons[i, j]);
                 }
         }
@@ -59,8 +62,7 @@ namespace Safe2
         {
             int j = this.PointToClient(Cursor.Position).Y / 50;
             int i = this.PointToClient(Cursor.Position).X / 50;
-            int countI;
-            int countJ;
+
             if (swt)
             {
                 flip(buttons[i, j]);
@@ -77,17 +79,6 @@ namespace Safe2
                         flip(buttons[i, countJ]);
                 }
             }
-
-          /* for (i = 0; i < fieldSize; i++)
-            {
-                for (j = 0; j < fieldSize; j++)
-                {
-
-                    Console.Write("{0,3}", buttons[j, i].Tag);           
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();*/
 
             checkWin();
 
@@ -109,7 +100,7 @@ namespace Safe2
             {
                 for (int j = 1; j < fieldSize; j++)
                 {
-                    Console.WriteLine("CHe za huina {0} {1} {2}", i, j, check);
+                    Console.WriteLine("{0} {1} {2}", i, j, check);
                     if ((int)buttons[i, j].Tag != (int)buttons[prevI, prevJ].Tag)
                         return false;
                     prevI = i;
@@ -134,30 +125,55 @@ namespace Safe2
 
         private void btnStart3_Click(object sender, EventArgs e)
         {
-            if (!started)
-            {
-                Console.WriteLine("Сторона: " + fieldSize);
-                CreateButtons();
-                started = true;
-                btnStart3.Enabled = false;
-            }
+            restart();
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        int times;
+
+        private void restart()
         {
+
             for (int i = 0; i < fieldSize; i++)
                 for (int j = 0; j < fieldSize; j++)
                 {
                     this.Controls.Remove(buttons[i, j]);
                 }
+            Console.WriteLine("Найдено через - " + times++);
             started = false;
-            btnStart3.Enabled = true;
-            //Application.Restart();
+            CreateButtons();
+            if(fieldSize % 2 != 0)
+            {
+                if (!isCorrect())
+                    restart();
+            }
+            
         }
 
-       // private bool isCorrect()
-        //{
-            
-       // }
+        private bool isCorrect()
+        {
+            int[] lineCount = new int[fieldSize];
+            int[] columnCount = new int[fieldSize];
+            for (int i = 0; i < fieldSize; i++)
+                for (int j = 0; j < fieldSize; j++)
+                {
+                    if ((int)buttons[i, j].Tag == 1)
+                    {
+                        columnCount[i] += 1;
+                        lineCount[j] += 1;
+                    }
+                }
+
+            for (int i = 1; i < fieldSize; i++)
+                {
+                    if ((columnCount[i] % 2 != columnCount[i - 1] % 2) || (lineCount[i] % 2 != columnCount[i - 1] % 2))
+                    {
+                        Console.WriteLine("Нерешаемо");
+                        return false;
+                    }
+                }
+            Console.WriteLine("Решаемо");
+            return true;
+        }
     }
 }
