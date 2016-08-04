@@ -33,8 +33,6 @@ namespace Safe2
             fieldSize = (int)numericUpDown1.Value;
             buttons = new Button[fieldSize, fieldSize];
             //Win conditions
-            win1 = new int[fieldSize, fieldSize];
-            win0 = new int[fieldSize, fieldSize];
             current = new int[fieldSize, fieldSize];
             //Creating field of game
             for (int i = 0; i < fieldSize; i++)
@@ -51,10 +49,9 @@ namespace Safe2
                     buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                     buttons[i, j].MouseClick += new MouseEventHandler(btn_MouseClick);
                     this.Controls.Add(buttons[i, j]);
-
-                    win1[i, j] = 1;
                 }
         }
+
 
         void btn_MouseClick(object sender, MouseEventArgs e)
         {
@@ -62,24 +59,27 @@ namespace Safe2
             int i = this.PointToClient(Cursor.Position).X / 50;
             int countI;
             int countJ;
-            flip(buttons[i, j]);
-            /*for (countI = 0; countI < fieldSize; countI++)
+            MessageBox.Show(e.Button.ToString());
+            if (e.Button == MouseButtons.Right)
             {
-                flip(buttons[countI, j]);
+                flip(buttons[i, j]);
+                Console.WriteLine("Right");
             }
-            for (countJ =0; countJ < fieldSize; countJ++)
+            else if (e.Button == MouseButtons.Left)
             {
-                if(countJ!=j)
-                flip(buttons[i, countJ]);
-            } */
-
-            for (i = 0; i < fieldSize; i++)
-                for (j = 0; j < fieldSize; j++)
+                for (countI = 0; countI < fieldSize; countI++)
                 {
-                    current[i, j] = (int)buttons[i, j].Tag;
+                    flip(buttons[countI, j]);
                 }
-            j = 0;
-            for (i = 0; i < fieldSize; i++)
+                for (countJ = 0; countJ < fieldSize; countJ++)
+                {
+                    if (countJ != j)
+                        flip(buttons[i, countJ]);
+                }
+                Console.WriteLine("Left");
+            }
+
+           /* for (i = 0; i < fieldSize; i++)
             {
                 for (j = 0; j < fieldSize; j++)
                 {
@@ -88,7 +88,7 @@ namespace Safe2
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine();
+            Console.WriteLine();*/
 
             won = checkWin();
 
@@ -103,33 +103,26 @@ namespace Safe2
 
         private bool checkWin()
         {
-            //bool check1 = Enumerable.SequenceEqual(current, win0);
-            bool check0 = false;
-           /* for (int i = 0; i < fieldSize; i++)
-                for (int j = 0; j < fieldSize; j++)
+            bool check = false;
+            for (int i = 0; i < fieldSize; i++)
+            {
+                for (int j = 1; j < fieldSize; j++)
                 {
-                    if (current[i, j] == 0)
-                        win0 = true;
+                    if ((int)buttons[i, j].Tag == (int)buttons[i, j-1].Tag)
+                        check = true;
                     else
                     {
-                        win0 = false;
+                        check = false;
                         break;
                     }
                 }
-            for (int i = 0; i < fieldSize; i++)
-                for (int j = 0; j < fieldSize; j++)
-                {
-                    if (current[i, j] == 1)
-                        win1 = true;
-                    else
-                    {
-                        win1 = false;
+                    if (!check)
                         break;
-                    }
-                } */
-            if (win1 || win0)
+            }              
+
+            if (check)
             {
-                MessageBox.Show("WON! win1 " +win1 + "win0 " + win0);
+                MessageBox.Show("WON!");
                 return true;
             }
             else
@@ -154,7 +147,14 @@ namespace Safe2
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < fieldSize; i++)
+                for (int j = 0; j < fieldSize; j++)
+                {
+                    this.Controls.Remove(buttons[i, j]);
+                }
+            started = false;
+            btnStart3.Enabled = true;
+            //Application.Restart();
         }
 
     }
