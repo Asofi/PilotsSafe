@@ -30,7 +30,6 @@
         {
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btnStart3 = new System.Windows.Forms.Button();
-            this.btnSwitch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,23 +69,11 @@
             this.btnStart3.UseVisualStyleBackColor = true;
             this.btnStart3.Click += new System.EventHandler(this.btnStart3_Click);
             // 
-            // btnSwitch
-            // 
-            this.btnSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSwitch.Location = new System.Drawing.Point(588, 101);
-            this.btnSwitch.Name = "btnSwitch";
-            this.btnSwitch.Size = new System.Drawing.Size(90, 52);
-            this.btnSwitch.TabIndex = 5;
-            this.btnSwitch.Text = "Switch";
-            this.btnSwitch.UseVisualStyleBackColor = true;
-            this.btnSwitch.Click += new System.EventHandler(this.btnSwitch_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(687, 531);
-            this.Controls.Add(this.btnSwitch);
             this.Controls.Add(this.btnStart3);
             this.Controls.Add(this.numericUpDown1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -101,7 +88,6 @@
         #endregion
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btnStart3;
-        private System.Windows.Forms.Button btnSwitch;
     }
 }
 
