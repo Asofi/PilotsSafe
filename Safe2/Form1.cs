@@ -17,8 +17,6 @@ namespace Safe2
 
         private int fieldSize;
         Random rnd = new Random();
-        private bool started = false;
-        private bool won = false;
         private bool swt = false;
 
         int countI;
@@ -149,12 +147,6 @@ namespace Safe2
             int j = this.PointToClient(Cursor.Position).Y / 50;
             int i = this.PointToClient(Cursor.Position).X / 50;
 
-            if (swt)
-            {
-                flip(buttons[i, j]);
-            }
-            else if (!swt)
-            {
                 for (countI = 0; countI < fieldSize; countI++)
                 {
                     flip(buttons[countI, j]);
@@ -164,7 +156,7 @@ namespace Safe2
                     if (countJ != j)
                         flip(buttons[i, countJ]);
                 }
-            }
+            
             for (i = 0; i < fieldSize; i++)
             {
                 for (j = 0; j < fieldSize; j++)
@@ -227,7 +219,6 @@ namespace Safe2
                         this.Controls.Remove(buttons[i, j]);
                         buttons[i, j].Dispose();
                     }
-                started = true;
                 CreateButtons();
             }
             else
